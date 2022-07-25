@@ -11,67 +11,66 @@ import org.junit.jupiter.api.Test;
 class ProductManagerTest {
     ProductRepository repository = new ProductRepository();
 ProductManager manager = new ProductManager(repository);
-    Product book1 = new Book(1, "Мать", 500, "Максим Горький");
-    Product book2 = new Book(2, "Ведьмак", 1500, "Анджей Сапковский");
-    Product book3 = new Book(3, "Сказки", 1000, "Александр Пушкин");
-    Product book4 = new Book(4, "Бородино", 500, "Михаил Лермонтов");
-    Product smartphone1 = new Smartphone(5, "Galaxy A5", 5000, "Samsung");
-    Product smartphone2 = new Smartphone(6, "RedmiNote 9", 14000, "Xiaomi");
-    Product smartphone3 = new Smartphone(7, "Iphone 9S", 25000, "Samsung");
+    Product product1 = new Book(1, "Мать", 500, "Максим Горький");
+    Product product2 = new Book(2, "Ведьмак", 1500, "Анджей Сапковский");
+    Product product3 = new Book(3, "Сказки", 1000, "Александр Пушкин");
+    Product product4 = new Book(4, "Бородино", 500, "Михаил Лермонтов");
+    Product product5= new Smartphone(5, "Galaxy A5", 5000, "Samsung");
+    Product product6 = new Smartphone(6, "RedmiNote 9", 14000, "Xiaomi");
+    Product product7 = new Smartphone(7, "Iphone 9S", 25000, "Samsung");
 
     @Test
     public void addNewProduct(){
-        manager.addProduct(book1);
-        manager.addProduct(book2);
-        manager.addProduct(book3);
-        manager.addProduct(book4);
-        manager.addProduct(smartphone1);
-        manager.addProduct(smartphone2);
-        manager.addProduct(smartphone3);
-        Product[] expected = {book1, book2, book3, book4, smartphone1, smartphone2, smartphone3};
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        manager.addProduct(product3);
+        manager.addProduct(product4);
+        manager.addProduct(product5);
+        manager.addProduct(product6);
+        manager.addProduct(product7);
+        Product[] expected = {product1, product2, product3,product4, product5, product6, product7};
         Product[] actual = manager.getProducts();
         Assertions.assertArrayEquals(expected, actual);
 
     }
     @Test
     public void removeProduct(){
-        manager.addProduct(book1);
-        manager.addProduct(book2);
-        manager.addProduct(book3);
-        manager.addProduct(book4);
-        manager.addProduct(smartphone1);
-        manager.addProduct(smartphone2);
-        manager.addProduct(smartphone3);
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        manager.addProduct(product3);
+        manager.addProduct(product4);
+        manager.addProduct(product5);
+        manager.addProduct(product6);
+        manager.addProduct(product7);
         manager.removeById(4);
-        Product[] expected = {book1, book2, book3,  smartphone1, smartphone2, smartphone3};
+        Product[] expected = {product1, product2, product3, product5, product6, product7};
         Product[] actual = manager.getProducts();
         Assertions.assertArrayEquals(expected, actual);
 
     }
     @Test
     public void searchProduct() {
-        manager.addProduct(book1);
-        manager.addProduct(book2);
-        manager.addProduct(book3);
-        manager.addProduct(book4);
-        manager.addProduct(smartphone1);
-        manager.addProduct(smartphone2);
-        manager.addProduct(smartphone3);
-
-        Product[] expected = {book2};
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        manager.addProduct(product3);
+        manager.addProduct(product4);
+        manager.addProduct(product5);
+        manager.addProduct(product6);
+        manager.addProduct(product7);
+        Product[] expected = {product2};
         Product[] actual = manager.searchBy("Ведьмак");
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void searchNotProduct() {
-        manager.addProduct(book1);
-        manager.addProduct(book2);
-        manager.addProduct(book3);
-        manager.addProduct(book4);
-        manager.addProduct(smartphone1);
-        manager.addProduct(smartphone2);
-        manager.addProduct(smartphone3);
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        manager.addProduct(product3);
+        manager.addProduct(product4);
+        manager.addProduct(product5);
+        manager.addProduct(product6);
+        manager.addProduct(product7);
 
         Product[] expected = {};
         Product[] actual = manager.searchBy("Огонь");
