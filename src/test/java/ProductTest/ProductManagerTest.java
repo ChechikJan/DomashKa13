@@ -12,7 +12,7 @@ class ProductManagerTest {
     ProductRepository repository = new ProductRepository();
 ProductManager manager = new ProductManager(repository);
     Product product1 = new Book(1, "Мать", 500, "Максим Горький");
-    Product product2 = new Book(2, "Ведьмак", 1500, "Анджей Сапковский");
+    Product product2 = new Book(2, "Сказки", 1500, "Шарль Перро");
     Product product3 = new Book(3, "Сказки", 1000, "Александр Пушкин");
     Product product4 = new Book(4, "Бородино", 500, "Михаил Лермонтов");
     Product product5= new Smartphone(5, "Galaxy A5", 5000, "Samsung");
@@ -57,8 +57,8 @@ ProductManager manager = new ProductManager(repository);
         manager.addProduct(product5);
         manager.addProduct(product6);
         manager.addProduct(product7);
-        Product[] expected = {product2};
-        Product[] actual = manager.searchBy("Ведьмак");
+        Product[] expected = {product6};
+        Product[] actual = manager.searchBy("RedmiNote 9");
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -74,6 +74,19 @@ ProductManager manager = new ProductManager(repository);
 
         Product[] expected = {};
         Product[] actual = manager.searchBy("Огонь");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void searchMultipleProducts() {
+        manager.addProduct(product1);
+        manager.addProduct(product2);
+        manager.addProduct(product3);
+        manager.addProduct(product4);
+        manager.addProduct(product5);
+        manager.addProduct(product6);
+        manager.addProduct(product7);
+        Product[] expected = {product2, product3};
+        Product[] actual = manager.searchBy("Сказки");
         Assertions.assertArrayEquals(expected, actual);
     }
 
