@@ -1,6 +1,7 @@
 package ProductTest;
 
 import ProductRepository.ProductRepository;
+import ProductRepository.NotFoundException;
 import org.Product.Book;
 import org.Product.Product;
 import org.Product.Smartphone;
@@ -43,12 +44,27 @@ class ProductRepositoryTest {
         repository.save(product5);
         repository.save(product6);
         repository.save(product7);
-        repository.removeById(product4.getId());
-        Product[] expected = {product1, product2, product3,  product5, product6, product7};
+        repository.removeById(4);
+        Product[] expected = {product1, product2, product3, product5, product6, product7};
 
         Product[] actual = repository.getProducts();
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void removeNonExistentById () {
+        ProductRepository repository = new ProductRepository();
+        repository.save(product1);
+        repository.save(product2);
+        repository.save(product3);
+        repository.save(product4);
+        repository.save(product5);
+        repository.save(product6);
+        repository.save(product7);
+
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repository.removeById(8);
+        });
+    }
 
 }
