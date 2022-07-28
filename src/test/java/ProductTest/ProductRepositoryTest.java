@@ -1,7 +1,8 @@
 package ProductTest;
 
-import ProductRepository.ProductRepository;
+import ProductRepository.AlreadyExistsException;
 import ProductRepository.NotFoundException;
+import ProductRepository.ProductRepository;
 import org.Product.Book;
 import org.Product.Product;
 import org.Product.Smartphone;
@@ -17,6 +18,7 @@ class ProductRepositoryTest {
     Product product5 = new Smartphone(5, "Galaxy A5", 5000, "Samsung");
     Product product6 = new Smartphone(6, "RedmiNote 9", 14000, "Xiaomi");
     Product product7 = new Smartphone(7, "Iphone 9S", 25000, "Samsung");
+    Product product8 = new Book(8, "Гамлет", 700, "Уильям шекспир");
 
 
     @Test
@@ -31,6 +33,24 @@ class ProductRepositoryTest {
         Product[] expected = {product1, product2, product3, product4, product5, product6, product7};
         Product[] actual = repository.getProducts();
         Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+    void saveProductSameId() {
+        repository.save(product1);
+        repository.save(product2);
+        repository.save(product3);
+        repository.save(product4);
+        repository.save(product5);
+        repository.save(product6);
+        repository.save(product7);
+        repository.save(product8);
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            repository.save(product8);
+        });
 
 
     }
